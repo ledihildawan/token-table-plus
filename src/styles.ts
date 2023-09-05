@@ -1,11 +1,29 @@
+import "react-loading-skeleton/dist/skeleton.css"
+
 import { Link } from "react-router-dom"
 
 import styled, { createGlobalStyle, css } from "styled-components"
+
+const button = css`
+  border: 0;
+  border-radius: 4px;
+  padding: 0.5625rem 1.125rem;
+  background: #2569a5;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+`
 
 const container = css`
   max-width: 74.25rem;
   width: 100%;
   margin: 0 auto;
+
+  @media (width <= 1200px) {
+    padding: 0 1rem;
+  }
 `
 
 export const GlobalStyle = createGlobalStyle`
@@ -15,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
+    color: #444F5C;
     background: #F3F7FB;
     font-family: 'Open Sans', sans-serif;
   }
@@ -23,6 +42,54 @@ export const GlobalStyle = createGlobalStyle`
     flex: 1;
     ${container}
     margin: 0 auto 3.25rem;
+  }
+
+  .pagination {
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+    margin: 1.625rem 0 0;
+    padding: 0;
+    list-style: none;
+
+    @media (width < 576px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  .pagination a {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #BCC9DA;
+    border-radius: 6px;
+    padding: .75rem;
+    color: #444F5C;
+    font-size: .875rem;
+    line-height: 0;
+    cursor: default;
+  }
+
+  .pagination li:not(.disabled) a:hover {
+    border-color: #1B91E4;
+    background: #1B91E4;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .pagination li.active a {
+    border-color: #1B91E4;
+    color: #fff;
+    background: #1B91E4;
+  }
+
+  .pagination li.disabled a {
+    pointer-events: none;
+    color: #ACBCCF;
+    border: 1px solid #ACBCCF;
   }
 `
 
@@ -38,6 +105,11 @@ export const HeaderWrapper = styled.header`
   align-items: flex-end;
   background: #fff;
   box-shadow: 0px 4px 19px 0px #00000012;
+
+  @media (width < 576px) {
+    height: initial;
+    padding-top: 15px;
+  }
 `
 
 export const NavigationWrapper = styled.nav`
@@ -72,7 +144,7 @@ export const NavigationLink = styled(Link)`
 `
 
 export const Breadcrumb = styled.nav`
-  margin: 0.875rem 0;
+  margin: 1rem 0 0.875rem;
   color: #acbccf;
   font-size: 0.625rem;
 `
@@ -93,14 +165,98 @@ export const CardTitle = styled.h2`
 `
 
 export const FilterWrapper = styled.div`
+  min-height: 40px;
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 2.375rem;
+
+  & > span {
+    width: 100%;
+  }
+`
+
+export const Select = styled.select`
+  width: 100%;
+  border: 0;
+  width: 215px;
+  outline: 1px solid #e3ebf4;
+  border-right: 0.875rem solid transparent;
+  border-radius: 4px;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+
+  &:invalid {
+    color: #9eaec1;
+  }
+
+  option:checked {
+    display: none;
+  }
+
+  @media (width < 576px) {
+    width: 100%;
+  }
+`
+
+export const InputWrapper = styled.div`
+  position: relative;
+  outline: 1px solid #e3ebf4;
+  border-radius: 4px;
+  padding: 0.625rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+
+  @media (width < 576px) {
+    width: 100%;
+  }
+`
+
+export const Input = styled.input`
+  width: 296px;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.875rem;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &::placeholder {
+    color: #9eaec1;
+  }
+
+  @media (width < 576px) {
+    width: 100%;
+  }
+`
+
+export const BtnRemove = styled.button`
+  ${button}
+  background: #e11730;
+`
+
+export const BtnSearch = styled.button`
+  ${button}
+
+  @media (width < 576px) {
+    width: 100%;
+  }
 `
 
 export const TableWrapper = styled.div`
   overflow: hidden;
   border-radius: 4px;
+`
+
+export const PaginationLoadingWrapper = styled.div`
+  margin: 1.625rem 0 0;
+  span {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
 `
 
 export const CellWrapper = styled.div<{ $link?: boolean; $color?: string }>`
@@ -109,7 +265,7 @@ export const CellWrapper = styled.div<{ $link?: boolean; $color?: string }>`
   cursor: ${({ $link }) => ($link ? "pointer" : "normal")};
 `
 
-export const DetailRow = styled.div`
+export const DetailRowWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 2.9375rem;
@@ -126,8 +282,24 @@ export const DetailRow = styled.div`
   }
 
   & > p:last-child {
+    max-width: 345px;
+    width: 100%;
     color: #444f5c;
     font-weight: 700;
+  }
+`
+
+export const EmptyStateWrapper = styled.div`
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
   }
 `
 

@@ -29,4 +29,5 @@ build
 # Miscellaneous
 *.local
 
+.vite
 .notes

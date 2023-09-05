@@ -8,4 +8,17 @@ export type Coin = {
   type: string
 }
 
+export type Filter = {
+  type: string
+  name: string
+}
+
+export type CoinState = {
+  coin: Coin
+  value: Coin[]
+  filter: Filter
+  status: "idle" | "loading" | "failed"
+  searchResult: Coin[]
+}
+
 export type Data = { nodes: Coin[] }
