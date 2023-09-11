@@ -1,4 +1,4 @@
-import { DetailRowWrapper } from "../styles"
+import { DetailRowWrapper } from "@/styles"
 
 import Skeleton from "react-loading-skeleton"
 

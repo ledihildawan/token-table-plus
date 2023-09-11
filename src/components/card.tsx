@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { CardTitle, CardWrapper } from "../styles"
+import { CardTitle, CardWrapper } from "@/styles"
 
 export default function Card({
   title,

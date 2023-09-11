@@ -4,7 +4,7 @@ import {
   configureStore,
   combineReducers,
 } from "@reduxjs/toolkit"
-import { coinSlice } from "./pages/coin/reducer"
+import { coinSlice } from "@pages/coin/reducer"
 
 import logger from "redux-logger"
 

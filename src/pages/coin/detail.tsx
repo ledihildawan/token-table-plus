@@ -1,12 +1,12 @@
-import { useAppDispatch, useAppSelector } from "../../hooks"
-import { Breadcrumb } from "../../styles"
+import { useAppDispatch, useAppSelector } from "@hooks"
+import { Breadcrumb } from "@/styles"
 
 import { useEffect } from "react"
-import { getCoinById, selectCoin, selectStatus } from "./reducer"
 import { useParams } from "react-router-dom"
+import { getCoinById, selectCoin, selectStatus } from "./reducer"
 
-import Card from "../../components/card"
-import DetailRow from "../../components/detail-row"
+import Card from "@components/card"
+import DetailRow from "@components/detail-row"
 
 export default function Detail() {
   const { id } = useParams()

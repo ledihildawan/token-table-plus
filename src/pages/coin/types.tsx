@@ -20,5 +20,3 @@ export type CoinState = {
   status: "idle" | "loading" | "failed"
   searchResult: Coin[]
 }
-
-export type Data = { nodes: Coin[] }

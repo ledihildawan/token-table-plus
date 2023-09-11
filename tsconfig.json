@@ -8,19 +8,23 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["testing-library__jest-dom"],
-    "rootDir": "src",
-    "baseUrl": ".",
+    "module": "commonjs",
+
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"],
+      "@hooks": ["src/hooks"],
+      "@hooks/*": ["src/hooks/*"],
+      "@pages/*": ["src/pages/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@components/*": ["src/components/*"]
     }
   },
-  "include": ["src"],
+  "include": ["./src/**/*", "*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

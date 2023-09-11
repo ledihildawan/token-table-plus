@@ -1,18 +1,10 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react"
-import {
-  Input,
-  Select,
-  BtnSearch,
-  InputWrapper,
-  FilterWrapper,
-} from "../styles"
-import { setupFilter } from "../pages/coin/reducer"
-import { useAppDispatch } from "../hooks"
-import { default as SearchIcon } from "../assets/icons/search"
+import { ChangeEvent, useEffect, useState } from "react"
+import { Input, Select, BtnSearch, InputWrapper, FilterWrapper } from "@/styles"
+import { setupFilter } from "@pages/coin/reducer"
+import { default as SearchIcon } from "@/assets/icons/search"
+import { useMediaQuery, useAppDispatch, useDebounce } from "@hooks"
 
 import Skeleton from "react-loading-skeleton"
-import useMediaQuery from "../hooks/use-media-query"
-import useDebounce from "../hooks/use-debounce"
 
 function Loading({ variant }: { variant: string }) {
   return (

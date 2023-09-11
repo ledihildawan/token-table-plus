@@ -1,10 +1,10 @@
-import { Breadcrumb } from "../../../styles"
-import { isText } from "../../../utils"
+import { Breadcrumb } from "@/styles"
+import { isText } from "@/utils"
 import { useList } from "./hooks"
 
-import Card from "../../../components/card"
-import Table from "../../../components/table"
-import Filter from "../../../components/filter"
+import Card from "@components/card"
+import Table from "@components/table"
+import Filter from "@components/filter"
 
 export default function List() {
   const {
@@ -13,7 +13,7 @@ export default function List() {
     columns,
     loading,
     pagination,
-    filteredData,
+    searchResult,
     loadingLabels,
     handleSearch,
   } = useList()
@@ -27,10 +27,10 @@ export default function List() {
       <Breadcrumb>Coin List</Breadcrumb>
 
       <Card title="Coin List">
-        <Filter loading={status === "loading"} onSearch={handleSearch} />
+        <Filter loading={isText("loading", status)} onSearch={handleSearch} />
 
         <Table
-          data={filteredData?.nodes?.length ? filteredData : data}
+          data={searchResult?.nodes?.length ? searchResult : data}
           loading={loading}
           columns={columns}
           pagination={pagination}

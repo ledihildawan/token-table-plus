@@ -1,12 +1,12 @@
-import { Coin, Data } from "../types"
-import { CellWrapper, BtnRemove } from "../../../styles"
+import { Coin } from "../types"
+import { CellWrapper, BtnRemove } from "@/styles"
 import { useNavigate } from "react-router-dom"
 import { usePagination } from "@table-library/react-table-library/pagination"
-import { useEffect, useState } from "react"
-import { useAppDispatch, useAppSelector } from "../../../hooks"
+import { useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "@hooks"
 import {
-  getCoin,
   remove,
+  getCoin,
   searchCoin,
   selectCoins,
   selectStatus,
@@ -24,9 +24,6 @@ const loadingLabels = [
 ]
 
 export function useList() {
-  const [data, setData] = useState<Data>({ nodes: [] })
-  const [filteredData, setFilteredData] = useState<null | Data>(null)
-
   const coin = useAppSelector(selectCoins)
   const status = useAppSelector(selectStatus)
   const columns = [
@@ -89,7 +86,10 @@ export function useList() {
   ]
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const pagination = usePagination(data, { state: { page: 0, size: 100 } })
+  const pagination = usePagination(
+    { nodes: coin },
+    { state: { page: 0, size: 100 } },
+  )
   const searchResult = useAppSelector(selectSearchResult)
 
   function handleSearch() {
@@ -102,22 +102,14 @@ export function useList() {
     dispatch(getCoin())
   }, [])
 
-  useEffect(() => {
-    setData({ nodes: coin })
-  }, [coin])
-
-  useEffect(() => {
-    setFilteredData({ nodes: searchResult })
-  }, [searchResult])
-
   return {
-    data,
     status,
     columns,
     pagination,
-    filteredData,
     loadingLabels,
     handleSearch,
+    data: { nodes: coin },
     loading: status === "loading",
+    searchResult: { nodes: searchResult },
   }
 }

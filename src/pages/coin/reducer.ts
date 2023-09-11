@@ -1,6 +1,6 @@
 import { Coin, CoinState, Filter } from "./types"
 import { RootState } from "@/store"
-import { isText } from "../../utils"
+import { isText } from "@/utils"
 import { fetchCoin } from "./api"
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 

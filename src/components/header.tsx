@@ -5,7 +5,7 @@ import {
   NavigationWrapper,
   NavigationLink,
   NavigationListItem,
-} from "../styles"
+} from "@/styles"
 
 export default function Header() {
   const { pathname } = useLocation()

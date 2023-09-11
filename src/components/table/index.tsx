@@ -1,18 +1,17 @@
 import { State } from "@table-library/react-table-library/types/common"
-import { PaginationLoadingWrapper, TableWrapper } from "../../styles"
+import { PaginationLoadingWrapper, TableWrapper } from "@/styles"
 import { CompactTable } from "@table-library/react-table-library/compact"
 import {
   PaginationFunctions,
   PaginationOptionsSound,
 } from "@table-library/react-table-library/pagination"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useTheme } from "@table-library/react-table-library/theme"
 import { setupLoadingColums, setupLoadingData } from "./utils"
 
 import Skeleton from "react-loading-skeleton"
-import EmptyState from "../empty-state"
 import ReactPaginate from "react-paginate"
-import useMediaQuery from "../../hooks/use-media-query"
+import useMediaQuery from "@/hooks/use-media-query"
 
 type Pagination = {
   state: State
