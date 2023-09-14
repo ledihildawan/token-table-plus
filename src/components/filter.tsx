@@ -7,21 +7,23 @@ import { useMediaQuery, useAppDispatch, useDebounce } from "@hooks"
 import Skeleton from "react-loading-skeleton"
 
 function Loading({ variant }: { variant: string }) {
+  const isMobile = variant === "mobile"
+
   return (
     <FilterWrapper>
       <Skeleton
-        width={variant === "mobile" ? "100%" : 215}
-        height={40}
+        width={isMobile ? "100%" : 215}
+        height={isMobile ? 38 : 40}
         borderRadius={4}
       />
       <Skeleton
-        width={variant === "mobile" ? "100%" : 296}
-        height={40}
+        width={isMobile ? "100%" : 296}
+        height={isMobile ? 39 : 40}
         borderRadius={4}
       />
       <Skeleton
-        width={variant === "mobile" ? "100%" : 82}
-        height={40}
+        width={isMobile ? "100%" : 82}
+        height={isMobile ? 37 : 40}
         borderRadius={4}
       />
     </FilterWrapper>

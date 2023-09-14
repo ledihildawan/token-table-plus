@@ -172,14 +172,17 @@ export const FilterWrapper = styled.div`
   margin-bottom: 2.375rem;
 
   & > span {
-    width: 100%;
+    display: inherit;
+
+    @media (width < 576px) {
+      width: 100%;
+    }
   }
 `
 
 export const Select = styled.select`
-  width: 100%;
-  border: 0;
   width: 215px;
+  border: 0;
   outline: 1px solid #e3ebf4;
   border-right: 0.875rem solid transparent;
   border-radius: 4px;
@@ -200,6 +203,7 @@ export const Select = styled.select`
 `
 
 export const InputWrapper = styled.div`
+  width: 296px;
   position: relative;
   outline: 1px solid #e3ebf4;
   border-radius: 4px;
@@ -213,8 +217,9 @@ export const InputWrapper = styled.div`
 `
 
 export const Input = styled.input`
-  width: 296px;
+  width: 100%;
   border: 0;
+  padding: 0;
   color: inherit;
   font-family: inherit;
   font-size: 0.875rem;
