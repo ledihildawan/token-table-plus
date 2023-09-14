@@ -1,4 +1,8 @@
+import { SITE_TITLE, useDocumentTitle } from "@/hooks/use-document-title"
+
 export default function Home() {
+  useDocumentTitle(SITE_TITLE)
+
   return (
     <>
       <h1>Token Table Plus</h1>
