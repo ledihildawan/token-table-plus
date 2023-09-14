@@ -1,9 +1,9 @@
-import { useAppDispatch, useAppSelector } from "@hooks"
+import { SITE_TITLE, useDocumentTitle } from "@/hooks/use-document-title"
 import { Breadcrumb } from "@/styles"
-
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { getCoinById, selectCoin, selectStatus } from "./reducer"
+import { useAppDispatch, useAppSelector } from "@hooks"
+import { selectCoin, clearDetail, getCoinById, selectStatus } from "./reducer"
 
 import Card from "@components/card"
 import DetailRow from "@components/detail-row"
@@ -18,7 +18,13 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getCoinById(id!))
+
+    return () => {
+      dispatch(clearDetail())
+    }
   }, [])
+
+  useDocumentTitle(coin.name ? `${coin.name} - ${SITE_TITLE}` : null)
 
   return (
     <>
