@@ -1,3 +1,4 @@
+import { SITE_TITLE, useDocumentTitle } from "@/hooks/use-document-title"
 import { Coin } from "../types"
 import { CellWrapper, BtnRemove } from "@/styles"
 import { useNavigate } from "react-router-dom"
@@ -99,8 +100,12 @@ export function useList() {
   }
 
   useEffect(() => {
-    dispatch(getCoin())
+    if (!coin.length) {
+      dispatch(getCoin())
+    }
   }, [])
+
+  useDocumentTitle(`Coin List - ${SITE_TITLE}`)
 
   return {
     status,
