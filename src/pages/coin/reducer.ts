@@ -76,6 +76,9 @@ export const coinSlice = createSlice({
         }
       })
     },
+    clearDetail: (state) => {
+      state.coin = initialState.coin
+    },
   },
   extraReducers: {
     [getCoin.rejected.toString()]: (state) => {
@@ -111,7 +114,8 @@ export const coinSlice = createSlice({
   },
 })
 
-export const { remove, searchCoin, setupFilter } = coinSlice.actions
+export const { remove, searchCoin, setupFilter, clearDetail } =
+  coinSlice.actions
 
 export const selectCoin = (state: RootState) => state.coin.coin
 export const selectCoins = (state: RootState) => state.coin.value
