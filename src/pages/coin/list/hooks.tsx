@@ -13,6 +13,7 @@ import {
   selectStatus,
   selectSearchResult,
 } from "../reducer"
+import { toast } from "react-toastify"
 
 const loadingLabels = [
   "ID",
@@ -74,7 +75,7 @@ export function useList() {
             if (deleteConfirm) {
               dispatch(remove(item.id))
 
-              alert(
+              toast.success(
                 `${item.symbol} deleted successfully. Refresh the browser if you want to revert all deleted item in list.`,
               )
             }
