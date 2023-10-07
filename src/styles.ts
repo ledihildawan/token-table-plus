@@ -1,3 +1,4 @@
+import "react-toastify/dist/ReactToastify.css"
 import "react-loading-skeleton/dist/skeleton.css"
 
 import { Link } from "react-router-dom"
@@ -125,22 +126,36 @@ export const NavigationList = styled.ul`
 `
 
 export const NavigationListItem = styled.li<{ $active?: any }>`
+  position: relative;
   padding-right: 0.9375rem;
   padding-bottom: 0.4375rem;
   color: #8597ac;
 
-  ${(props) =>
-    props.$active &&
-    css`
-      color: #1e5387;
-      font-weight: 700;
-      border-bottom: 4px solid #2569a5;
-    `}
+  ${(props) => {
+    return (
+      props.$active &&
+      css`
+        color: #1e5387;
+        font-weight: 700;
+        border-bottom: 4px solid #2569a5;
+      `
+    )
+  }}
 `
 
 export const NavigationLink = styled(Link)`
   color: inherit;
   text-decoration: none;
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 33px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
 `
 
 export const Breadcrumb = styled.nav`
