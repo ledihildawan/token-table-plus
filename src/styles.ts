@@ -5,8 +5,8 @@ import { Link } from "react-router-dom"
 
 import styled, { createGlobalStyle, css } from "styled-components"
 
-const button = css`
-  border: 0;
+export const button = css`
+  border: 1px solid #2569a5;
   border-radius: 4px;
   padding: 0.5625rem 1.125rem;
   background: #2569a5;
@@ -91,6 +91,10 @@ export const GlobalStyle = createGlobalStyle`
     pointer-events: none;
     color: #ACBCCF;
     border: 1px solid #ACBCCF;
+  }
+
+  .ReactModalPortal > div {
+    z-index: 9999;
   }
 `
 
@@ -254,7 +258,9 @@ export const Input = styled.input`
 
 export const BtnRemove = styled.button`
   ${button}
+
   background: #e11730;
+  border-color: #e11730;
 `
 
 export const BtnSearch = styled.button`
