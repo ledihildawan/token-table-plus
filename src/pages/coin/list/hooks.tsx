@@ -3,15 +3,18 @@ import { Coin } from "../types"
 import { CellWrapper, BtnRemove } from "@/styles"
 import { useNavigate } from "react-router-dom"
 import { usePagination } from "@table-library/react-table-library/pagination"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "@hooks"
 import {
+  select,
   remove,
   getCoin,
   searchCoin,
   selectCoins,
   selectStatus,
   selectSearchResult,
+  selectCoin,
+  clearCoin,
 } from "../reducer"
 import { toast } from "react-toastify"
 
@@ -26,7 +29,13 @@ const loadingLabels = [
 ]
 
 export function useList() {
-  const coin = useAppSelector(selectCoins)
+  const [
+    showRemoveConfirmationDeleteModal,
+    setShowRemoveConfirmationDeleteModal,
+  ] = useState<boolean>(false)
+
+  const coin = useAppSelector(selectCoin)
+  const coins = useAppSelector(selectCoins)
   const status = useAppSelector(selectStatus)
   const columns = [
     {
@@ -65,22 +74,7 @@ export function useList() {
     {
       label: "Action",
       renderCell: (item: Coin) => (
-        <BtnRemove
-          type="button"
-          onClick={() => {
-            const deleteConfirm = confirm(
-              `Are you sure want to remove ${item.symbol} in list?`,
-            )
-
-            if (deleteConfirm) {
-              dispatch(remove(item.id))
-
-              toast.success(
-                `${item.symbol} deleted successfully. Refresh the browser if you want to revert all deleted item in list.`,
-              )
-            }
-          }}
-        >
+        <BtnRemove type="button" onClick={() => handleBtnRemoveOnClicked(item)}>
           Remove
         </BtnRemove>
       ),
@@ -89,7 +83,7 @@ export function useList() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const pagination = usePagination(
-    { nodes: coin },
+    { nodes: coins },
     { state: { page: 0, size: 100 } },
   )
   const searchResult = useAppSelector(selectSearchResult)
@@ -100,8 +94,29 @@ export function useList() {
     pagination.fns.onSetPage(0)
   }
 
+  function handleBtnRemoveOnClicked(item: Coin) {
+    dispatch(select(item))
+    setShowRemoveConfirmationDeleteModal(true)
+  }
+
+  function handleDeleteConfirmationModalConfrimed(
+    visible: boolean,
+    label: string,
+  ) {
+    if (label === "Yes") {
+      dispatch(remove(coin.id))
+      dispatch(clearCoin())
+
+      toast.success(
+        `${coin.symbol} deleted successfully. Refresh the browser if you want to revert all deleted item in list.`,
+      )
+    }
+
+    setShowRemoveConfirmationDeleteModal(visible)
+  }
+
   useEffect(() => {
-    if (!coin.length) {
+    if (!coins.length) {
       dispatch(getCoin())
     }
   }, [])
@@ -109,12 +124,16 @@ export function useList() {
   useDocumentTitle(`Coin List - ${SITE_TITLE}`)
 
   return {
+    coin,
     status,
     columns,
     pagination,
     loadingLabels,
+    showRemoveConfirmationDeleteModal,
     handleSearch,
-    data: { nodes: coin },
+    setShowRemoveConfirmationDeleteModal,
+    handleDeleteConfirmationModalConfrimed,
+    data: { nodes: coins },
     loading: status === "loading",
     searchResult: { nodes: searchResult },
   }

@@ -42,6 +42,9 @@ export const coinSlice = createSlice({
   initialState,
   name: "coin",
   reducers: {
+    select: (state, action: PayloadAction<Coin>) => {
+      state.coin = action.payload
+    },
     remove(state, action: PayloadAction<string>) {
       state.value = state.value.filter((el) => el.id !== action.payload)
       state.searchResult = state.value.filter((el) => el.id !== action.payload)
@@ -76,7 +79,7 @@ export const coinSlice = createSlice({
         }
       })
     },
-    clearDetail: (state) => {
+    clearCoin: (state) => {
       state.coin = initialState.coin
     },
   },
@@ -114,7 +117,7 @@ export const coinSlice = createSlice({
   },
 })
 
-export const { remove, searchCoin, setupFilter, clearDetail } =
+export const { select, remove, searchCoin, setupFilter, clearCoin } =
   coinSlice.actions
 
 export const selectCoin = (state: RootState) => state.coin.coin

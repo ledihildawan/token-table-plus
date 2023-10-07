@@ -5,9 +5,11 @@ import { useList } from "./hooks"
 import Card from "@components/card"
 import Table from "@components/table"
 import Filter from "@components/filter"
+import RemoveConfirmation from "@/components/remove-confirmation"
 
 export default function List() {
   const {
+    coin,
     data,
     status,
     columns,
@@ -15,7 +17,9 @@ export default function List() {
     pagination,
     searchResult,
     loadingLabels,
+    showRemoveConfirmationDeleteModal,
     handleSearch,
+    handleDeleteConfirmationModalConfrimed,
   } = useList()
 
   if (isText("failed", status)) {
@@ -41,6 +45,12 @@ export default function List() {
           `}
         />
       </Card>
+
+      <RemoveConfirmation
+        visible={showRemoveConfirmationDeleteModal}
+        message={`Are you sure want to remove ${coin.name} in list?`}
+        onConfrimed={handleDeleteConfirmationModalConfrimed}
+      />
     </>
   )
 }

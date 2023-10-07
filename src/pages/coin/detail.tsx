@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/styles"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@hooks"
-import { selectCoin, clearDetail, getCoinById, selectStatus } from "./reducer"
+import { selectCoin, clearCoin, getCoinById, selectStatus } from "./reducer"
 
 import Card from "@components/card"
 import DetailRow from "@components/detail-row"
@@ -20,7 +20,7 @@ export default function Detail() {
     dispatch(getCoinById(id!))
 
     return () => {
-      dispatch(clearDetail())
+      dispatch(clearCoin())
     }
   }, [])
 
