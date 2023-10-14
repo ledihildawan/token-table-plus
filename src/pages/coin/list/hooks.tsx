@@ -108,7 +108,7 @@ export function useList() {
       dispatch(clearCoin())
 
       toast.success(
-        `${coin.symbol} deleted successfully. Refresh the browser if you want to revert all deleted item in list.`,
+        `${coin.symbol} remove successfully from the list. Refresh the browser if you want to revert all deleted item in list.`,
       )
     }
 
