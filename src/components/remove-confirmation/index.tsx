@@ -29,7 +29,6 @@ export default function RemoveConfirmation({
           bottom: "auto",
           marginRight: "-50%",
           transform: "translate(-50%, -50%)",
-          maxWidth: 360,
         },
       }}
       isOpen={visible}
