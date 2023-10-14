@@ -96,6 +96,12 @@ export const GlobalStyle = createGlobalStyle`
   .ReactModalPortal > div {
     z-index: 9999;
   }
+
+  div[aria-label="Delete Confirmation Modal"] {
+    @media (width < 395px) {
+      max-width: calc(100% - 32px)
+    }
+  }
 `
 
 export const AppLayoutWrapper = styled.div`
